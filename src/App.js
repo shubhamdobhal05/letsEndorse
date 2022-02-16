@@ -4,7 +4,7 @@ import MultipleInput from "./components/form";
 function App() {
   return (
     <div>
-      <MultipleInput/>
+      <MultipleInput name = "Tom" business_idea = "Choclate Factory" city = "London"/>
     </div>
   );
 }

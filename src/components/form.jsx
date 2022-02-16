@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import Select from 'react-select';
 import "./form.css"
 
-const MultipleInput = () => {
+const MultipleInput = (props) => {
     const [state, setState] = useState({
         age_of_establishment : "",
         primary_product_service_offered: "",
@@ -33,6 +33,11 @@ const MultipleInput = () => {
 
         setState({age_of_establishment: "", primary_product_service_offered: "", secondary_product_service_offered:"", processed_products:"",relevent_experience: "", business_area: "", establishment_area: "", customers: "", suppliers:""});
 
+    }
+
+    var [stages, setStages] = useState();
+    var handleStage = (e) => {
+        setStages(Array.isArray(e)?e.map(x=> x.label):[]);
     }
 
 
@@ -159,7 +164,7 @@ const MultipleInput = () => {
         <form action="" onSubmit={handleSubmit} className = "form">
             <div>
                 <label htmlFor="business_stage">Stage of business</label>
-                <Select options = {stage}/>
+                <Select options = {stage} onChange= {handleStage}/>
             </div>
             <div>
                 <label htmlFor="age_of_establishment">Age of establishment</label>
@@ -287,11 +292,12 @@ const MultipleInput = () => {
                 data.map((curElem) => {
                     return (
                     <div key = {curElem.id}>
+                        
                         <p>This enterprise has been operational since {curElem.age_of_establishment}years and has been serving its customers since then</p>
                         <p>This establishment offers products/services like{curElem.primary_product_service_offered}</p>
                         <p>In addition the enterprise shall also be involved in {curElem.secondary_product_service_offered}</p>
                         <p>Other products of the enterprise shall include{curElem.processed_products}</p>
-                        <p>has a relevent experience of {curElem.relevent_experience}years in this feild</p>
+                        <p>{props.name} has a relevent experience of {curElem.relevent_experience}years in this feild</p>
                         <p>{curElem.business_area}</p>
                         <p>The size of the establishment is {curElem.establishment_area}sq ft</p>
                         <p>Our customers shall include-{curElem.customers}</p>
